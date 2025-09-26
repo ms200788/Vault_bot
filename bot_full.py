@@ -59,7 +59,7 @@ scheduler = AsyncIOScheduler(jobstores=jobstores)
 scheduler.configure(timezone="UTC")
 
 # Schema
-SCHEMA = \"\"\"
+SCHEMA = """
 CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT);
 CREATE TABLE IF NOT EXISTS users (id BIGINT PRIMARY KEY, username TEXT, first_name TEXT, last_name TEXT, last_seen TIMESTAMPTZ);
 CREATE TABLE IF NOT EXISTS sessions (id BIGSERIAL PRIMARY KEY, owner_id BIGINT, created_at TIMESTAMPTZ, protect INTEGER DEFAULT 0, auto_delete_minutes INTEGER DEFAULT 0, title TEXT, revoked INTEGER DEFAULT 0, header_msg_id BIGINT, header_chat_id BIGINT, deep_link TEXT);
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS files (id BIGSERIAL PRIMARY KEY, session_id BIGINT, f
 CREATE TABLE IF NOT EXISTS delete_jobs (id BIGSERIAL PRIMARY KEY, session_id BIGINT, target_chat_id BIGINT, message_ids JSONB, run_at TIMESTAMPTZ, created_at TIMESTAMPTZ, status TEXT DEFAULT 'scheduled');
 CREATE TABLE IF NOT EXISTS sqlite_backups (id BIGSERIAL PRIMARY KEY, filename TEXT, data bytea, created_at timestamptz DEFAULT now());
 CREATE TABLE IF NOT EXISTS neon_kv (key TEXT PRIMARY KEY, value TEXT, updated_at timestamptz DEFAULT now());
-\"\"\"
+"""
 
 pg_pool: Optional[asyncpg.pool.Pool] = None
 
