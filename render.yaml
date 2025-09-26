@@ -1,14 +1,20 @@
 services:
   - type: web
     name: vaultbot
-    env: python
-    plan: starter
-    region: oregon
-    buildCommand: pip install -r requirements.txt
-    startCommand: python bot_full.py
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
     envVars:
       - key: BOT_TOKEN
+        sync: false
       - key: OWNER_ID
+        sync: false
       - key: UPLOAD_CHANNEL_ID
+        sync: false
       - key: DB_CHANNEL_ID
-      - key: NEON_DB_URL
+        sync: false
+      - key: WEBHOOK_HOST
+        sync: false
+      - key: PORT
+        value: 10000
