@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: vaultbot
+    env: python
+    plan: starter
+    region: oregon
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot_full.py
+    envVars:
+      - key: BOT_TOKEN
+      - key: OWNER_ID
+      - key: UPLOAD_CHANNEL_ID
+      - key: DB_CHANNEL_ID
+      - key: NEON_DB_URL
